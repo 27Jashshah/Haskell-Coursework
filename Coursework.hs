@@ -6,33 +6,6 @@ import qualified Data.Set as HS (fromList, toList)
 import Test.QuickCheck
 
 {-
-  Your task is to design a datatype that represents the mathematical concept of
-  a (finite) set of elements (of the same type). We have provided you with an
-  interface (do not change this!) but you will need to design the datatype and
-  also support the required functions over sets. Any functions you write should
-  maintain the following invariant: no duplication of set elements.
-
-  There are lots of different ways to implement a set. The easiest is to use a
-  list. Alternatively, one could use an algebraic data type, wrap a binary
-  search tree, or even use a self-balancing binary search tree. Extra marks will
-  be awarded for efficient implementations (a self-balancing tree will be more
-  efficient than a linked list for example).
-
-  You are **NOT** allowed to import anything from the standard library or other
-  libraries. Your edit of this file should be completely self-contained.
-
-  **DO NOT** change the type signatures of the functions below: if you do, we
-  will not be able to test them and you will get 0% for that part. While sets
-  are unordered collections, we have included the Ord constraint on some
-  signatures: this is to make testing easier.
-
-  You may write as many auxiliary functions as you need. Everything must be in
-  this file.
-
-  See the note **ON MARKING** at the end of the file.
--}
-
-{-
    PART 1.
    You need to define a Set datatype.
 -}
@@ -180,29 +153,4 @@ powerSet (Node l val r) = fromListNO (map fromListNO aux)
         where aux = [] : foldr f [] (toListNO (Node l val r))
               f x acc = ([x] : (fmap (x:) acc)) ++ acc
 
-{-
-   ON MARKING:
 
-   Be careful! This coursework will be marked using QuickCheck, against
-   Haskell's own Data.Set implementation. This testing will be conducted
-   automatically via a marking script that tests for equivalence between your
-   output and Data.Set's output. There is no room for discussion, a failing test
-   means that your function does not work properly: you do not know better than
-   QuickCheck and Data.Set! Even one failing test means 0 marks for that
-   function. Changing the interface by renaming functions, deleting functions,
-   or changing the type of a function will cause the script to fail to load in
-   the test harness. This requires manual adjustment by a TA: each manual
-   adjustment will lose 10% from your score. If you do not want to/cannot
-   implement a function, leave it as it is in the file (with undefined).
-
-   Marks will be lost for too much similarity to the Data.Set implementation.
-
-   Pass: creating the Set type and implementing toList and fromList is enough
-   for a passing mark of 40%, as long as both toList and fromList satisfy the
-   toFromListProp function.
-
-   The maximum mark for those who use Haskell lists to represent a Set is 70%.
-   To achieve a higher grade than is, one must write a more efficient
-   implementation. 100% is reserved for those brave few who write their own
-   self-balancing binary tree.
--}
